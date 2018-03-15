@@ -1,6 +1,6 @@
 <?php
 
-function lm_reservation_message_hook_form_reserve_form_alter(&$form, &$form_state, $form_id)
+function lm_reservation_message_form_ding_reservation_reserve_form_alter(&$form, &$form_state)
 {
     /*
      * add custom submit handler at the end of the chain , so we can check
