@@ -1,0 +1,5 @@
+name = oc_reservation_message
+description = "Sender besked når en reservation er modtaget."
+package = OC
+core = 7.x
+ 
