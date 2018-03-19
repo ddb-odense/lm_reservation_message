@@ -13,9 +13,28 @@ function lm_reservation_message_resevation_form_submit_email(&$form, &$form_stat
     /*
      * check if reservation was a success and send notification email
      */
-    if(isset($form_state['reserved']) && $form_state['reserved'])
+    if(!isset($form_state['reserved']) && !$form_state['reserved'])
     {
         //send email
+           $title = $form_state['values']['reservable']->entity;
+          $language = null;
+          $params = array(
+            'subject' => "Der er foretaget en reservation på lm.fynbib.dk",
+            'body' => "Hej\r\n\r\n{$form_state['values']['reservable']->entity->id}:{$form_state['values']['reservable']->entity->title} er blevet reserveret\r\n\r\nVenlig hilsen\r\nlm.fynbib.dk",
+          );
+          $to = 'tfpet@odense.dk';
+          $message = drupal_mail('lm_reservation_message', 'lm_reservation_notice_mail', $to, $language, $params, TRUE);
     }
-}
 
+}
+/**
+ * Implements hook_mail for module_name.
+ */
+function lm_reservation_message_mail($key, &$message, $params) {
+  switch ($key) {
+    case 'lm_reservation_notice_mail':
+      $message['subject'] = $params['subject'];
+      $message['body'][] = $params['body'];
+      break;
+  }
+}
