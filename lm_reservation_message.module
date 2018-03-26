@@ -13,7 +13,7 @@ function lm_reservation_message_resevation_form_submit_email(&$form, &$form_stat
     /*
      * check if reservation was a success and send notification email
      */
-    if(!isset($form_state['reserved']) && !$form_state['reserved'])
+    if(!isset($form_state['reserved']) && $form_state['reserved'])
     {
         //send email
            $title = $form_state['values']['reservable']->entity;
