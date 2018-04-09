@@ -20,9 +20,9 @@ function lm_reservation_message_resevation_form_submit_email(&$form, &$form_stat
           $language = null;
           $params = array(
             'subject' => "Der er foretaget en reservation på lm.fynbib.dk",
-            'body' => "Hej\r\n\r\n{$form_state['values']['reservable']->entity->id}:{$form_state['values']['reservable']->entity->title} er blevet reserveret\r\n\r\nVenlig hilsen\r\nlm.fynbib.dk",
+            'body' => "Hej\r\n\r\n\"{$form_state['values']['reservable']->entity->title}\" med faust: {$form_state['values']['reservable']->entity->id} er blevet reserveret\r\n\r\nVenlig hilsen\r\nlm.fynbib.dk",
           );
-          $to = 'tfpet@odense.dk';
+          $to = 'po@langelandkommune.dk';
           $message = drupal_mail('lm_reservation_message', 'lm_reservation_notice_mail', $to, $language, $params, TRUE);
     }
 
