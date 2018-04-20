@@ -15,12 +15,14 @@ function lm_reservation_message_resevation_form_submit_email(&$form, &$form_stat
      */
     if(isset($form_state['reserved']) && $form_state['reserved'])
     {
+        $creds = ding_user_get_creds();
+
         //send email
-           $title = $form_state['values']['reservable']->entity;
+          $title = $form_state['values']['reservable']->entity;
           $language = null;
           $params = array(
             'subject' => "Der er foretaget en reservation på lm.fynbib.dk",
-            'body' => "Hej\r\n\r\n\"{$form_state['values']['reservable']->entity->title}\" med faust: {$form_state['values']['reservable']->entity->id} er blevet reserveret\r\n\r\nVenlig hilsen\r\nlm.fynbib.dk",
+            'body' => "Hej bibliotekar. \r\n\r\n " . $creds['name'] . " har reserveret " . $form_state['values']['reservable']->entity->title . " med faustnummer: " . $form_state['values']['reservable']->entity->id . ". \r\n\r\nVenlig hilsen\r\nlm.fynbib.dk",
           );
           $to = 'po@langelandkommune.dk';
           $message = drupal_mail('lm_reservation_message', 'lm_reservation_notice_mail', $to, $language, $params, TRUE);
